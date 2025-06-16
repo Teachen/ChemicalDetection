@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>良田webCamera</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/eloamWebCamera.js"></script>
+</head>
+<style>
+    .eloam-but {
+        width: 160px;
+        margin: 10px;
+        padding: 2px;
+        margin-left: 0px;
+    }
+</style>
+<body>
+<div>
+
+    <body style="background-color: #72fcff;">
+
+    <div style="display: flex;height: 700px">
+        <div style="width: 980px;">
+            <div style="width: 100%">
+                <div style="margin-left: 100px;">
+                    <h5>高拍仪</h5>
+                    <input type="button" onclick="设备初始化()" value="设备初始化" class="eloam-but"/>
+                    <input type="button" onclick="使用js扩展设备初始化()" value="使用js扩展设备初始化" class="eloam-but"/><br>
+                    <!--   <h6>摄像头操作</h6>-->
+                    <input type="button" onclick="打开摄像头('0')" value="打开主摄像头" class="eloam-but"/>
+                    <input type="button" onclick="打开摄像头('1')" value="打开副摄像头" class="eloam-but"/>
+                    <input type="button" onclick="关闭摄像头()" value="关闭摄像头" class="eloam-but"/>
+                    <input type="button" onclick="检查摄像头状态()" value="检查摄像头状态" class="eloam-but"/><br>
+                    <input type="button" onclick="左转()" value="左转" class="eloam-but"/>
+                    <input type="button" onclick="右转()" value="右转" class="eloam-but"/>
+                    <input type="button" onclick="获取像素()" value="获取像素" class="eloam-but"/>
+                    <input type="button" onclick="设置像素()" value="设置像素" class="eloam-but"/>
+                  <!--  <input type="button" onclick="获取当前分辨率索引()" value="获取当前分辨率索引" class="eloam-but"/>--><br>
+                    <input type="button" onclick="缩放(true)" value="放大" class="eloam-but"/>
+                    <input type="button" onclick="缩放(false)" value="缩小" class="eloam-but"/>
+                    <input type="button" onclick="原图()" value="原图" class="eloam-but"/>
+                    <input type="button" onclick="纠偏('1')" value="开启纠偏" class="eloam-but"/>
+                    <input type="button" onclick="纠偏('0')" value="关闭纠偏" class="eloam-but"/><br>
+
+                    <!--    <h6>拍照</h6>-->
+                    <input type="button" onclick="拍照()" value="拍照" class="eloam-but"/>
+                    <input type="button" onclick="拍照base64()" value="拍照base64" class="eloam-but"/>
+                    <input type="button" onclick="展平拍照()" value="展平拍照" class="eloam-but"/>
+                    <input type="button" onclick="开启自动拍照()" value="开启自动拍照" class="eloam-but"/>
+                    <input type="button" onclick="关闭自动拍照()" value="关闭自动拍照" class="eloam-but"/><br>
+                    <input type="button" onclick="二寸照()" value="二寸照" class="eloam-but"/>
+                    <input type="button" onclick="框选图片()" value="框选图片" class="eloam-but"/>
+                    <input type="button" onclick="人证比对()" value="人证比对" class="eloam-but"/>
+
+                    <br>
+                    <input type="button" onclick="判断设备连接()" value="判断设备连接" class="eloam-but"/>
+                    <input type="button" onclick="获取设备序列号()" value="获取设备序列号" class="eloam-but"/>
+                    <input type="button" onclick="获取设备信息()" value="获取设备信息" class="eloam-but"/>
+                    <input type="button" onclick="获取加密狗" value="获取加密狗" class="eloam-but"/>
+
+                    <br>
+                    <input type="button" onclick="获取音频设备列表()" value="获取音频设备列表" class="eloam-but"/>
+                    <input type="button" onclick="获取录制视频的状态()" value="获取录制视频的状态" class="eloam-but"/>
+                    <input type="button" onclick="开始录制视频()" value="开始录制视频" class="eloam-but"/>
+                    <input type="button" onclick="停止录制视频并获取录制视频()" value="停止录制并获取录制视频" class="eloam-but"/><br>
+
+
+                    <input type="button" onclick="读IC卡()" value="读IC卡" class="eloam-but"/>
+                    <input type="button" onclick="二维码识别()" value="二维码识别" class="eloam-but"/>
+                    <input type="button" onclick="读身份证()" value="读身份证" class="eloam-but"/>
+                    <input type="button" onclick="获取指纹" value="获取指纹" class="eloam-but"/>
+
+                    <input type="button" onclick="活体检测()" value="活体检测" class="eloam-but"/><br>
+
+
+
+                    <input type="button" onclick="签名窗口弹出()" value="签名窗口弹出" class="eloam-but"/>
+                    <input type="button" onclick="获取签名()" value="获取签名" class="eloam-but"/>
+                    <input type="button" onclick="关闭签名()" value="关闭签名" class="eloam-but"/>
+                    <input type="button" onclick="推送网页()" value="推送网页" class="eloam-but"/>
+                    <input type="button" onclick="关闭推送网页()" value="关闭推送网页" class="eloam-but"/><br>
+                    <input type="button" onclick="打开评价" value="打开评价" class="eloam-but"/>
+                    <input type="button" onclick="关闭评价" value="关闭评价" class="eloam-but"/>
+                    <input type="button" onclick="获取评价结果" value="获取评价结果" class="eloam-but"/><br>
+
+
+
+                    <input type="button" onclick="OCR识别()" value="OCR识别" class="eloam-but"/>
+                    <input type="button" onclick="模板OCR()" value="模板OCR" class="eloam-but"/>
+                    <input type="button" onclick="A3A4自动切换" value="A3A4自动切换(S1840专用)" class="eloam-but"/>
+                    <input type="button" onclick="串口签批()" value="串口签批" class="eloam-but"/>
+
+                    <br>
+                    <input type="button" onclick="图片合成()" value="图片合成" class="eloam-but"/>
+                    <input type="button" onclick="添加图片到PDF队列中()" value="添加图片到PDF队列中" class="eloam-but"/>
+                    <input type="button" onclick="清空PDF队列并获取()" value="清空PDF队列并获取" class="eloam-but"/>
+                    <input type="button" onclick="生成PDF文件()" value="生成PDF文件" class="eloam-but"/>
+                    <input type="button" onclick="多张图片合成图片()" value="多张图片合成/PDF" class="eloam-but"/><br>
+                    <input type="button" onclick="自定义方法调用()" value="自定义方法调用" class="eloam-but"/><br>
+
+                </div>
+            </div>
+
+        </div>
+        <div style="padding-top: 60px;margin-left: 20px;width: 800px">
+            <!--下面这些是要复制过去的-->
+            <div id="noniediv">
+                <img id="ImgMain" width="760" height="475"/>
+            </div>
+            <!-- 如果是ie浏览器，会显示ocx -->
+            <div id="ocxdiv">
+                <OBJECT classid="clsid:A4B4E9B5-78E6-4CE3-B8A1-4B36237943F8" id="ocxstreamimageId" width="360px"
+                        height="270px"></OBJECT>
+            </div>
+            <div>
+                <div id="imgList"></div>
+                <br>
+            </div>
+        </div>
+
+        <div id="outerdiv"
+             style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:999;width:100%;height:100%;display:none;">
+            <div id="innerdiv" style="position:absolute;">
+                <img id="bigimg" style="border:5px solid #fff;" src=""/>
+            </div>
+        </div>
+    </div>
+    </body>
+</div>
+<script>
+    var webCamera;
+
+    function 设备初始化() {
+        /**
+         *  <!--下面这些是要复制过去的-->
+            <div id="noniediv">
+            <img id="ImgMain" width="760" height="475"/>
+            </div>
+            <!-- 如果是ie浏览器，会显示ocx -->
+            <div id="ocxdiv">
+            <OBJECT classid="clsid:A4B4E9B5-78E6-4CE3-B8A1-4B36237943F8" id="ocxstreamimageId" width="360px"
+            height="270px"></OBJECT>
+            </div>
+         **/
+         webCamera = new WebCamera($, {
+             initCamera: true, // 是否要初始化摄像头状态，如果为true,则会检查摄像头状态，如果是打开的，会将摄像头关闭
+             hideDivImg: false,
+             port: '38088',// CameraWebService 服务端口，默认38088
+             ocxDivId: 'ocxdiv',// ocx 对应的div ID 为了
+             ocxId: 'ocxstreamimageId',// ocx 对应的id;这个传ocx 的id
+             imgMainDivId: 'noniediv',// 包含img div 的id,
+             imgMainId: 'ImgMain',// 非IE img id 显示预览
+        }, function (data) {//成功回调
+            console.log(data)
+        }, function (err) {//失败回调
+            console.log(err)
+        })
+    }
+    function 使用js扩展设备初始化() {
+        webCamera = $.eloamWebCamera({
+            initCamera: true, // 是否要初始化摄像头状态，如果为true,则会检查摄像头状态，如果是打开的，会将摄像头关闭
+            hideDivImg: true,// 初始化是否要隐藏显示摄像头窗口;true 隐藏，打开摄像头会显示,关闭摄像头时会隐藏；false
+            port: '38088',// CameraWebService 服务端口，默认38088
+            ocxDivId: 'ocxdiv',// ocx 对应的div ID 为了
+            ocxId: 'ocxstreamimageId',// ocx 对应的id;这个传ocx 的id
+            imgMainDivId: 'noniediv',// 包含img div 的id,
+            imgMainId: 'ImgMain',// 非IE img id 显示预览
+        }, function (data) {//成功回调
+            console.log(data)
+        }, function (err) {//失败回调
+            console.log(err)
+        })
+    }
+
+    function addImgDiv(imgPath) {
+        if (!imgPath) return
+        // 这里处理数据
+        // 这里判断数据
+        if (imgPath.indexOf('base64,') < 0) {
+            imgPath = 'data:image/jpg;base64,' + imgPath
+        }
+        var item = '<img height="100" width="100" src="' + imgPath + '" class="pic" onclick=\'openImage(this)\' />'
+        $('#imgList').append(item)
+    }
+
+    function openImage(imageItem) {
+        imgShow("#outerdiv", "#innerdiv", "#bigimg", imageItem);
+    }
+
+    function imgShow(outerdiv, innerdiv, bigimg, _this) {
+        var src = _this.src;//获取当前点击的pimg元素中的src属性
+        $(bigimg).attr("src", src);//设置#bigimg元素的src属性
+        /*获取当前点击图片的真实大小，并显示弹出层及大图*/
+        $("<img/>").attr("src", src).load(function () {
+            var windowW = $(window).width();//获取当前窗口宽度
+            var windowH = $(window).height();//获取当前窗口高度
+            var realWidth = this.width;//获取图片真实宽度
+            var realHeight = this.height;//获取图片真实高度
+            var imgWidth, imgHeight;
+            var scale = 0.8;//缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放
+            if (realHeight > windowH * scale) {//判断图片高度
+                imgHeight = windowH * scale;//如大于窗口高度，图片高度进行缩放
+                imgWidth = imgHeight / realHeight * realWidth;//等比例缩放宽度
+                if (imgWidth > windowW * scale) {//如宽度扔大于窗口宽度
+                    imgWidth = windowW * scale;//再对宽度进行缩放
+                }
+            } else if (realWidth > windowW * scale) {//如图片高度合适，判断图片宽度
+                imgWidth = windowW * scale;//如大于窗口宽度，图片宽度进行缩放
+                imgHeight = imgWidth / realWidth * realHeight;//等比例缩放高度
+            } else {//如果图片真实高度和宽度都符合要求，高宽不变
+                imgWidth = realWidth;
+                imgHeight = realHeight;
+            }
+            $(bigimg).css("width", imgWidth);//以最终的宽度对图片缩放
+            var w = (windowW - imgWidth) / 2;//计算图片与窗口左边距
+            var h = (windowH - imgHeight) / 2;//计算图片与窗口上边距
+            $(innerdiv).css({"top": h, "left": w});//设置#innerdiv的top和left属性
+            $(outerdiv).fadeIn("fast");//淡入显示#outerdiv及.pimg
+        });
+        $(outerdiv).click(function () {//再次点击淡出消失弹出层
+            $(this).fadeOut("fast");
+        });
+    }
+
+    function 打开摄像头(index) {
+        if (!index) {
+            index = 0
+        }
+        devIndex = index
+        var data = {
+            devIndex: index // 摄像头下标 0主头；1副头
+        }
+        webCamera.openCamera(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+    function 摄像头操作() {
+        var data = {
+            isOpen: 1,// 1 打开，0 关闭;默认为0
+            devIndex: index // 摄像头下标 0主头；1副头
+        }
+        webCamera.doCamera(data,function (data) {
+            console.log(data)
+        },function (err) {
+            console.log(err)
+        })
+    }
+    function 关闭摄像头() {
+        var data = {
+            devIndex: devIndex // 摄像头下标
+        }
+        webCamera.closeCamera(data, function (data) {
+            console.log(data)
+        }, function (err) {
+
+        })
+    }
+    function 检查摄像头状态() {
+        webCamera.checkCameraStatus(function (data) {
+            // {"code":"0", "message":"ok","state":"opened,closed,closed"}
+            // state 摄像头状态，closed为关闭，opened 为打开状态
+            console.log(data)
+        }, function (err) {
+
+        })
+    }
+
+    function 获取设备信息() {
+        webCamera.getEquipmentType(function (data) {
+            console.log(data)
+        }, function (err) {
+
+        })
+    }
+
+    function 获取音频设备列表() {
+        webCamera.findVideoList(function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+    function 获取录制视频的状态() {
+        webCamera.findVideoStatus(function (data) {
+            console.log(data)
+        },function (err) {
+            console.log(err)
+        })
+    }
+        function 开始录制视频() {
+        var data = {
+            devIndex: devIndex,        // 摄像头索引，默认为：1
+            width: "640",       // 视频宽度，默认：640
+            height: "480",      // 视频高度，默认：480
+            audio: "",          // 音频设备名，为空：系统第一个音频设备
+            frameRate: "10",    // 视频帧率，默认：10
+            filePath: "",       // 文件保存地址，为空：生成临时文件
+            bitRate: "400000", // 视频码率，默认：400000
+            "watermark": {        // 有该参数，将在视频中添加水印
+                "pos": "",            // 水印在图像中的位置，0:左上；1:右上；2:左下；3:右下；4:中间
+                "content": "",        // 水印内容，必须 utf-8编码
+                "transparency": "",   // 透明度0~255，0:透明；255:不透明
+                "fontSize": "",       // 字体大小，默认：32
+                "font": "",           // 字体
+                "color": ""           // 水印颜色，colorname
+            }
+        }
+        webCamera.startVideoRecord(data,function (data) {
+            console.log(data)
+        },function (err) {
+            console.log(err)
+        })
+    }
+    function 停止录制视频并获取录制视频() {
+        var data = {
+            findStatus: 0 // 停止成功后是否自动获取视频  0 不获取，1获取
+        }
+        webCamera.stopAndFindVideoRecord(data,function (data) {
+            console.log(data)
+        },function (err) {
+            console.log(err)
+        })
+    }
+
+    var devIndex = 0;
+    var zoon = 0;// 0 原图； 放大比例，取值0~9，0：原图，9最大显示
+    function 缩放(bl) {
+        console.log(bl)
+        if (bl) {
+            zoon++;
+            if (zoon > 9) {
+                alert('已经最大的啦')
+                zoon--;
+                return
+            }
+        } else {
+            zoon--;
+            if (zoon < 0) {
+                zoon++;
+                alert('已经最小的啦')
+                return
+            }
+        }
+        var data = {
+            "devIndex": devIndex,// 摄像头，0:主头；1:副头
+            "corp": zoon // 放大比例，取值0~9，0：原图，9最大显示
+        }
+        webCamera.doZoom(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    function 原图() {
+        zoon = 0;
+        var data = {
+            "devIndex": devIndex,// 摄像头，0:主头；1:副头
+            "corp": '0' // 放大比例，取值0~9，0：原图，9最大显示
+        }
+        webCamera.doZoom(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    function 获取像素() {
+        var data = {
+            devIndex: devIndex // 摄像头下标
+        }
+        webCamera.getResolution(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+    function 设置像素() {
+        webCamera.setResolution({
+            devIndex: 0,
+            width: 800,
+            height: 600
+        }, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+    function 获取当前分辨率索引() {
+        webCamera.getCurResolutionIndex(function (data) {
+            console.log(data)
+        },function (err) {
+            console.log(err)
+        })
+    }
+
+    function 二维码识别() {
+        var data = {
+            timeout: 20 // 超时时间，单位秒
+        }
+        webCamera.getQrCode(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    function 读身份证() {
+        webCamera.readIDCard(function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    function 活体检测() {
+        var data = {
+            timeout: 20 // 超时时间 单位秒
+        }
+        webCamera.faceLive(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    function 人证比对() {
+        var data = {
+            oneFace: '',// 第一个人脸
+            twoFace: '' // 第二个人脸
+        }
+        webCamera.faceComparisonEx(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    /**
+     *   参数 filePath 说明
+     *   ""，为空时，拍照保存本地，并返回base64数据，默认路径C:\Users\Administrator\Documents\HttpCamera
+     *  "D:\\1.jpg"， 传本地保存地址时，拍照，返回本地保存地址，返回base64。不可传服务器地址。
+     *  "base64"，传base64，拍照返回base64数据。不保存本地
+     * */
+    function 拍照() {
+        var data = {
+            filePath: "D:\\1.jpg",// 选择如下： ["", "D:\\1.jpg", "base64"]
+            devIndex: devIndex,// 拍照摄像头
+            qualityIndex: '',// 拍照质量，默认最高 0:默认质量；1:高质量；2:较高质量；3:中质量；4:较低质量；5:低质量
+            rotate: '',//图像旋转角度，90的整数倍，默认："0"
+            deskew: '',//纠偏（主头有效），参数：0:不纠偏；1:纠偏
+            deskewval: '0',// 纠偏像素值：正常给0，正数时多裁，负数时少裁
+            colorMode: 0,// 色彩模式，图片保存本地时调用。0：彩色 1：灰色 2：黑白 3：白纸印章 4：去背景色(普通文件) 5:去背景色(身份证)
+            bAutoAdjust: 0,// // 是否自动摆正： 0：不摆正 1：摆正
+            watermark: {}// 不传这个参数或传{} 则不增加水印操作
+            /* watermark: {// 如果不传，则不增加水印水印设置
+                 pos: '0',//水印在图像中的位置，0:左上；1:右上；2:左下；3:右下；4:中间
+                 content:'良田科技',// 水印内容，必须utf-8编码，当水印内容为空，将当前时间作为水印
+                 transparency: '200',//透明度，0~255,0:完全透明；255:不透明
+                 fontsize: '100',//字体大小，默认：32
+                 font: '微软雅黑',//字体
+                 color: 'yellow' //水印颜色，colorname
+             }*/
+        }
+        webCamera.grabImage(data, function (data) {
+            console.log(data)
+            addImgDiv(data.photoBase64)
+        }, function (err) {
+            console.log(err)
+        })
+
+    }
+
+    function 拍照base64() {
+        var data = {
+            devIndex: devIndex,// 拍照摄像头
+            rotate: '',//旋转角度
+            cutpage: 0
+        }
+        webCamera.grabImageBase64(data, function (data) {
+            // console.log(data)
+            addImgDiv(data.photoBase64)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    function 开启自动拍照() {
+        var data = {
+            listPath: 'D://httpcamera',//图片保存目录
+            filePathPrefix: 'LT'//图片名称前缀
+        }
+        webCamera.autoTakePhotos(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    function 关闭自动拍照() {
+        webCamera.stopAutoTakePhotos(function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    // 需要开启副头，设备需要带人脸芯片
+    function 二寸照() {
+        if (devIndex != 1) {
+            alert('需要是副头~')
+            return
+        }
+        webCamera.twoInchPhoto(function (data) {
+            addImgDiv(data)
+        }, function (err) {
+
+        })
+    }
+
+    function 框选图片() {
+        var data = {
+            "filepath": "D:\\1.jpg",    // 是否保存本地，可选，为空不保存本地，否则按路径保存
+            "left": 0,
+            "top": 0,
+            "right": 100,
+            "bottom": 100
+        }
+        webCamera.imageArea(data, function (data) {
+
+        }, function (err) {
+
+        })
+    }
+
+    // 展平拍照，支持拍照并展平，支持传图片展平
+    function 展平拍照() {
+        var data = {
+            filepath: '',//待展平图片路径，为空时，拍照并展平，为本地图片全路径时，对图片展平
+            rotate: 0,//旋转角度
+            devIndex: devIndex,// 摄像头索引
+            cutPage: 0,
+            autoFlat: {
+                "flat": "1",
+                "leftFilePath": "D://testleft.jpg",
+                "rightFilePath": "D://testright.jpg",
+                "removeFinger": "1",
+                "doublePage": "1"
+            }
+        }
+        webCamera.autoFlat(data, function (data) {
+
+        }, function (err) {
+
+        })
+    }
+
+    /**
+     * 适合设备：GW500A & GW1000A
+     */
+    function 签名窗口弹出() {
+        var data = {
+            // 签名位置与签名宽度
+            pos: {
+                top: 250,
+                left: 280,
+                width: 600,
+                height: 250
+            },
+            remark: '开始签名',// 描述
+        }
+        webCamera.signDlg(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    function 关闭签名() {
+        webCamera.closeSign(function (data) {
+            console.log(data)
+        }, function (err) {
+
+        })
+    }
+    function 获取签名() {
+        webCamera.findSignResult(function (data) {
+            console.log(data)
+        }, function (err) {
+
+        })
+    }
+
+    function 串口签批() {
+        var data = {
+            sendserialport: 21,
+            data: '110'
+        }
+        webCamera.sendSerialport(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+
+    }
+
+    /**
+     * 适合：GW500A & GW1000A 设备
+     *{ "code": "0", "message": "ok" }
+     { "code": "1", "message": "fail" } //设备连接成功，扩展屏设置失败
+     { "code": "2", "message": "fail" } //设备未连接
+     { "code": "3", "message": "fail" } //网页推送失败
+     */
+    function 推送网页() {
+        /**
+         * 适合：GW500A & GW1000A 设备
+         *{ "code": "0", "message": "ok" }
+         { "code": "1", "message": "fail" } //设备连接成功，扩展屏设置失败
+         { "code": "2", "message": "fail" } //设备未连接
+         { "code": "3", "message": "fail" } //网页推送失败
+         */
+        var data = {
+            url: 'https://www.baidu.com'//网页
+        }
+        webCamera.pushWebPage(data, function (data) {
+
+        }, function (err) {
+
+        })
+    }
+
+    function 关闭推送网页() {
+        webCamera.closeWebPage(function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    /**
+     * 参数：icCardType 说明
+     * 7、深圳通卡
+     * 6、读磁条卡
+     * 5、读社保卡
+     * 4、CPU银行卡
+     * 1、IC卡
+     * 2、M1卡
+     * 3、MEMORY 卡
+     * @type {{icCardType: number}}
+     */
+    function 读IC卡() {
+        var data = {
+            icCardType: 1,// IC卡类型，   2:M1 3:MEMORY 4:CPU 5:SOCIAL 6:Magnetic 7:SHENZHENTONG;
+        }
+        webCamera.readIcCard(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+
+    }
+    // 打开摄像头前调用有效
+    function 获取设备序列号() {
+        webCamera.getTerminalSerialNumber(function (data) {
+            console.log(data)
+        }, function (err) {
+
+        })
+    }
+
+    function 判断设备连接() {
+        webCamera.checkTerminalConnect(function (data) {
+
+        }, function (err) {
+
+        })
+    }
+
+    function 左转() {
+        var data = {
+            devIndex: 0//旋转摄像头下标
+        }
+        webCamera.leftRotate(data, function (data) {
+
+        }, function (err) {
+
+        })
+
+    }
+    function 右转() {
+        var data = {
+            devIndex: 0//旋转摄像头
+        }
+        webCamera.rightRotate(data, function (data) {
+
+        }, function (err) {
+
+        })
+    }
+
+    function OCR识别() {
+        var data = {
+            imgPath: 'D://testocr.jpg',//待识别的图片
+            savePDFPath: 'D://ocr123.pdf'// 保存OCR保存PDF
+        }
+        webCamera.doOcr(data, function (data) {
+
+        }, function (err) {
+
+        })
+    }
+    function 模板OCR() {
+        var data = {
+            "imageData": "",     // imageData:图片数据。为空：识别视频中的图片；图片路径：识别传入的图片
+            "xmlData": "1.xml"   // xmlData:模板名称。
+        }
+        webCamera.templateOcr(data,function (data) {
+            console.log(data)
+        },function (err) {
+            console.log(err)
+        })
+    }
+
+    /**
+     * 纠偏需要打开摄像头再调用才会启作用
+     */
+    function 纠偏(status) {
+        if(devIndex != 0){
+            alert('只有主头才能开启纠偏，请检查')
+            return
+        }
+        var data = {
+            devIndex: devIndex,// 要纠偏的摄像头下标
+            status: status // 0 关闭；1打开
+        }
+        webCamera.doDeskew(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+
+    function 获取指纹() {
+        var data = {
+            timeout: 20 // 超时时间，单位秒
+        }
+        webCamera.findFingerprint(data, function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
+    }
+    function 打开评价() {
+        webCamera.showEvaluator(function (data) {
+
+        },function (err) {
+
+        })
+    }
+    function 获取评价结果() {
+        webCamera.findFindEvaluator(function (data) {
+            console.log(data)
+        },function (err) {
+            console.log(err)
+        })
+    }
+    function 关闭评价() {
+        webCamera.closeEvaluator(function (data) {
+
+        },function (err) {
+
+        })
+    }
+    function A3A4自动切换() {
+        var data = {
+            "switchFlag": "1",  // 0:关闭自动切换；1:开启自动切换
+            "a3size": "0.5",    // 切换到A3幅面的阈值
+            "a4size": "0.9"     // 切换到A4幅面的阈值
+        }
+        webCamera.a3a4AutoSwitch(data,function (data) {
+
+        },function (err) {
+
+        })
+    }
+    function 获取加密狗() {
+        webCamera.findEncryptionKey(function (data) {
+
+        },function (err) {
+
+        })
+    }
+    function 图片合成() {
+        var data = {
+            oneImgBase64: '',// 第一张图base64
+            twoImgBase64: ''// 第二张图base64
+        }
+        webCamera.imgCompose(data,function (data) {
+            console.log(data)
+        },function (err) {
+            console.log(err)
+        })
+    }
+    function 添加图片到PDF队列中() {
+        var data = {
+            imgPath: '',//本地图片的绝对路径，非服务器图片的绝对路径
+            imgBase64: ''//被添加的图片base64
+        }
+        webCamera.addImgToPdfQueue(data,function (data) {
+            console.log(data)
+        },function (err) {
+            console.log(err)
+        })
+    }
+    function 清空PDF队列并获取() {
+        var data = {
+            findStatus: 0 // 是否获取合成PDF，0 不获取只清空；1清空并获取
+        }
+        webCamera.closePdfQueueAndFind(data,function (data) {
+            console.log(data)
+        },function (err) {
+
+        })
+    }
+    function 生成PDF文件() {
+        var data = {
+            pdfPath: '',//例如："D://test0000.pdf"，路径必须是左双斜杠，需要考虑前端斜杠过滤，可试试1，2，4斜杠格式。
+        }
+        webCamera.createPdfRecord(data,function (data) {
+            console.log(data)
+        },function (err) {
+            console.log(err)
+        })
+    }
+    function 多张图片合成图片() {
+        var data = {
+            outputFilePath: "D:res.jpg",                  // 输出文件保存地址。例：D://res.jpg
+            outputMaxWidth: "3000",                       // 合成后文件最大宽度。例：3000px
+            inputImageType: "0",                          // 待合成文件类型：0：file；1：base64
+            outputImageType: "0",                         // 合成后文件类型：0：jpg；1：PDF
+            isIdCardCompose: "1",
+// 是否是身份证：0:普通；1:是(必须是纠偏图片)
+            imageList: "D:\\1.jpg, D:\\2,jpg, D:\\3.jpg"  // 待合成图片列表。例："D:\\1.jpg,D:\\2.jpg,D:\\3.jpg"
+        }
+        webCamera.composePhotos(data,function (data) {
+            console.log(data)
+        },function (err) {
+            console.log(err)
+        })
+    }
+    function 自定义方法调用() {
+        webCamera.doCustomCall({
+            method: '',// get/post;如果为空，默认为post
+            url: 'device=isconnect',
+            data: {
+            },// 可以是对象，也可以是字符串
+            success: function (data) {// 成功回调
+                console.log(data)
+            },
+            error: function (err) {// 失败回调
+                console.log(err)
+            }
+        })
+    }
+</script>
+</body>
+</html>
